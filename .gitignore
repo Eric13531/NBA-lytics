@@ -1,2 +1,4 @@
 venv/
 nba_app_frontend/node_modules/
+ipynb_checkpoints/
+.vscode/
