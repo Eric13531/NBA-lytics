@@ -5,6 +5,9 @@ import FrontPage from "./routes/FrontPage.js";
 import PlayerDetails from './routes/PlayerDetails.js';
 import PlayerStats from './routes/PlayerStats.js';
 import PlayerSeasons from "./routes/PlayerSeasons.js";
+import TeamDetails from "./routes/TeamDetails.js";
+import TeamStats from "./routes/TeamStats.js";
+import TeamSeasons from "./routes/TeamSeasons.js";
 
 import './App.css';
 
@@ -21,6 +24,9 @@ Traceback (most recent call last):
 requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='stats.nba.com', port=443): Read timed out. (read timeout=30)
 
 // Extra: Change columns to follow same template all the time, regardless of whether the column is there or not
+// FOr search, add autocomplete (the first value in suggestions)
+// Add more support for search suggestions (state, city, nickname, abbreviation)
+// get_palyer_id is incorrect: What if name is prefix of different name?
 
 - Make drop list for form to recommend players
 - Return table of stats for players
@@ -50,6 +56,9 @@ function App() {
         <Route path="/player/:playerId" element={<PlayerDetails/>} />
         <Route path="/player/:playerId/stats/:season" element={<PlayerStats />} />
         <Route path="/player/:playerId/season" element={<PlayerSeasons />} />
+        <Route path="/team/:teamId" element={<TeamDetails/>} />
+        <Route path="/team/:teamId/stats/:season" element={<TeamStats />} />
+        <Route path="/team/:teamId/season" element={<TeamSeasons />} />
       </Routes>
     </Router>
   );

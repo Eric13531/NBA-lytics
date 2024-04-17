@@ -1,0 +1,146 @@
+.body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.playerBody {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+}
+
+.settingsBody{
+    width: 98%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.setting {
+    margin-left: 1.4em;
+    margin-right: 1.4em;
+    margin-bottom: 0.5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.gameLogBody { 
+    width: 90%;
+}
+
+.gameLogTitle{
+    font-weight: bold;
+    font-size: 1.3em;
+    margin-bottom: 0.2em;
+}
+
+.gameLogLinks{
+    display: flex;
+    /* flex-direction: row;
+    justify-content: start;
+    align-content: start;
+    align-items: flex-start; */ 
+    flex-wrap: wrap;
+}
+
+.gameLogLink{
+    font-size: 0.9em;
+    margin-right: 14px;
+    margin-bottom: 7px;
+}
+.playerName{
+    margin-bottom: 0.5em;
+}
+
+.playerLink{
+    margin-bottom: 1em;
+}
+
+
+.tableWrapper1 {
+    overflow-x: auto;
+    max-width: 100%;
+}
+
+.tableDiv1 {
+    height: 25px;
+
+}
+
+.tableWrapper2 {
+    overflow-x: auto;
+    max-width: 100%;
+    margin-bottom: 2em;
+}
+
+.tableDiv2 {
+}
+
+.hidden {
+    display: none;
+}
+
+.cell {
+
+    white-space: nowrap;
+    border-style: solid;
+    border-width: 0.1px;
+    padding: 0.25em;
+    margin: 0px;
+    font-size: 0.75em;
+    font-weight: 400;
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border-color: rgba(0, 0, 0, 0.25);
+}
+
+.header {
+    border-style: solid;
+    border-width: 1px;
+    padding: 0.2em;
+    font-size: 0.8em;
+    margin: 0px;
+    font-weight: 700;
+    background-color: #DADADA;
+    color: #420516;
+    border-color: rgba(0, 0, 0, 0.25);
+}
+
+.subtitle {
+    /* width: 100%
+    text */
+    margin-bottom: 0px;
+    color: #501b1d;
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    text-align: left;
+    /* padding-left: 1em; */
+    /* margin-
+    width: 100%;
+    text-align: left; */
+}
+
+
+    
+/* style={{
+    whiteSpace:
+        "nowrap",
+    borderStyle:
+        "solid",
+    borderWidth:
+        "1px",
+    padding:
+        "0.3em",
+    margin: "0px",
+    fontSize:
+        "0.85em",
+    textAlign:
+        "center",
+}} */
