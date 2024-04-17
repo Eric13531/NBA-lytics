@@ -2,3 +2,8 @@ venv/
 nba_app_frontend/node_modules/
 ipynb_checkpoints/
 .vscode/
+
+nba_app_backend/nba_app_backend/__pycache__/
+__pycache__/
+.ipynb_checkpoints/
+nba_app_backend/db.sqlite3
