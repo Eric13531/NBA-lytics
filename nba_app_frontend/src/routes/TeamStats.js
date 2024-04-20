@@ -5,7 +5,7 @@ import axios from "axios";
 import styles from "./TeamStats.module.css";
 // import StatsTable from "../components/StatsTable"
 import {
-    headerMapping,
+    teamHeaderMapping,
     headerMeaning,
     defaultHeaders,
 } from "../helper/constants";
@@ -208,10 +208,10 @@ const TeamStats = () => {
                         const header =
                             response.data.team_game_stats.headers[index];
                         if (
-                            headerMapping.hasOwnProperty(header) &&
-                            headerMapping[header] !== "N/A"
+                            teamHeaderMapping.hasOwnProperty(header) &&
+                            teamHeaderMapping[header] !== "N/A"
                         ) {
-                            newHeaders.push(headerMapping[header]);
+                            newHeaders.push(teamHeaderMapping[header]);
                             // indexArray.push(index)
                             indexArray[index] = header;
                         }
@@ -225,10 +225,10 @@ const TeamStats = () => {
                         const header =
                             response.data.team_game_stats.headers_playoffs[index];
                         if (
-                            headerMapping.hasOwnProperty(header) &&
-                            headerMapping[header] !== "N/A"
+                            teamHeaderMapping.hasOwnProperty(header) &&
+                            teamHeaderMapping[header] !== "N/A"
                         ) {
-                            newHeadersP.push(headerMapping[header]);
+                            newHeadersP.push(teamHeaderMapping[header]);
                             // indexArray.push(index)
                             indexArrayP[index] = header;
                         }
@@ -253,7 +253,7 @@ const TeamStats = () => {
                         ) {
                             if (indexArray.hasOwnProperty(stat_idx)) {
                                 const headerName =
-                                    headerMapping[
+                                    teamHeaderMapping[
                                         response.data.team_game_stats.headers[
                                             stat_idx
                                         ]
@@ -303,7 +303,7 @@ const TeamStats = () => {
                         ) {
                             if (indexArrayP.hasOwnProperty(stat_idx)) {
                                 const headerName =
-                                    headerMapping[
+                                    teamHeaderMapping[
                                         response.data.team_game_stats.headers[
                                             stat_idx
                                         ]
@@ -359,8 +359,9 @@ const TeamStats = () => {
                     // console.log(indexArray)
                 } catch (error) {
                     console.log(error.message);
+                    console.log(error.response.data.error);
                     if (
-                        error.message ===
+                        error.response.data.error ===
                         "We couldn't process the request. Please reload or try again later"
                     ) {
                         console.log("API DOWN");
@@ -430,7 +431,7 @@ const TeamStats = () => {
                         teamData &&
                         teamData.game_stats &&
                         teamData.game_stats.length === 0) ? styles.hidden : ""
-                    }`}>{`${season}-${(parseInt(season) + 1) % 100 < 10 ? "0" : ""}${(parseInt(season) + 1) % 100} Regular Season`}</h2>
+                    }`}>{`${season}-${(parseInt(season) + 1) % 100 < 10 ? "0" : ""}${(parseInt(season) + 1) % 100} Regular Season Games`}</h2>
                 <div
                     ref={wrapper1Ref}
                     className={`${styles.tableWrapper1} ${
@@ -512,7 +513,7 @@ const TeamStats = () => {
                         teamData &&
                         teamData.game_stats_playoffs &&
                         teamData.game_stats_playoffs.length === 0) ? styles.hidden : ""
-                    }`}>{`${season}-${(parseInt(season) + 1) % 100 < 10 ? "0" : ""}${(parseInt(season) + 1) % 100} Playoffs`}</h2>
+                    }`}>{`${season}-${(parseInt(season) + 1) % 100 < 10 ? "0" : ""}${(parseInt(season) + 1) % 100} Playoffs Games`}</h2>
                 <div
                     ref={wrapper1RefP}
                     className={`${styles.tableWrapper1} ${
@@ -596,7 +597,7 @@ const TeamStats = () => {
                     {team && (
                         <>
                             <h1 className={styles.playerName}>
-                                {team.full_name} Stats
+                                {team.full_name} Game Logs
                             </h1>
                             <Link
                                 className={styles.playerLink}

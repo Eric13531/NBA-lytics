@@ -87,6 +87,15 @@ const PlayerSeasons = () => {
             }
         }
 
+        // function reduceToOneDecimal(num) {
+        //     if (Math.floor(num).toString().length >= 3) {
+        //         return Math.floor(num);
+        //     } else {
+        //         let roundedNum = Math.round(num * 10) / 10;
+        //         return roundedNum % 1 === 0 ? roundedNum + ".0" : roundedNum;
+        //     }
+        // }
+
         function formatNumberWithThreeDecimals(number) {
             if (number === null) {
                 return null;
@@ -254,7 +263,24 @@ const PlayerSeasons = () => {
                                         response.data.player_career_stats
                                             .headers[stat_idx]
                                     ];
-                                if (headerName === "MIN") {
+                                if (
+                                    headerName === "MIN" ||
+                                    headerName === "FGM" ||
+                                    headerName === "FGA" ||
+                                    headerName === "3PM" ||
+                                    headerName === "EPA" ||
+                                    headerName === "FTA" ||
+                                    headerName === "FTM" ||
+                                    headerName === "ORB" ||
+                                    headerName === "DRB" ||
+                                    headerName === "TRB" ||
+                                    headerName === "AST" ||
+                                    headerName === "STL" ||
+                                    headerName === "BLK" ||
+                                    headerName === "TOV" ||
+                                    headerName === "PF" ||
+                                    headerName === "PTS"
+                                ) {
                                     game[stat_idx] = reduceToOneDecimal(
                                         game[stat_idx]
                                     );
@@ -304,7 +330,24 @@ const PlayerSeasons = () => {
                                         response.data.player_career_stats
                                             .headers[stat_idx]
                                     ];
-                                if (headerName === "MIN") {
+                                if (
+                                    headerName === "MIN" ||
+                                    headerName === "FGM" ||
+                                    headerName === "FGA" ||
+                                    headerName === "3PM" ||
+                                    headerName === "EPA" ||
+                                    headerName === "FTA" ||
+                                    headerName === "FTM" ||
+                                    headerName === "ORB" ||
+                                    headerName === "DRB" ||
+                                    headerName === "TRB" ||
+                                    headerName === "AST" ||
+                                    headerName === "STL" ||
+                                    headerName === "BLK" ||
+                                    headerName === "TOV" ||
+                                    headerName === "PF" ||
+                                    headerName === "PTS"
+                                ) {
                                     game[stat_idx] = reduceToOneDecimal(
                                         game[stat_idx]
                                     );
@@ -330,7 +373,7 @@ const PlayerSeasons = () => {
                             game_idx
                         ] = gameArray;
                     }
-                    
+
                     // TODO: Implement Regular season + Playoff combined averages
                     // for (
                     //     let game_idx = 0;
@@ -412,7 +455,7 @@ const PlayerSeasons = () => {
                 } catch (error) {
                     console.log(error.message);
                     if (
-                        error.message ===
+                        error.response.data.error ===
                         "We couldn't process the request. Please reload or try again later"
                     ) {
                         console.log("API DOWN");
@@ -479,8 +522,15 @@ const PlayerSeasons = () => {
                 {/* REGULAR SEASON DATA*/}
                 <h2
                     ref={subtitleRef}
-                    className={`${styles.subtitle}`}
-                >{`Regular Season Stats`}</h2>
+                    className={`${styles.subtitle} ${
+                        status !== "Received" ||
+                        (playerData &&
+                            playerData.career_stats &&
+                            playerData.career_stats.length === 0)
+                            ? styles.hidden
+                            : ""
+                    }`}
+                >{`Regular Season Career Stats`}</h2>
                 <div
                     ref={wrapper1Ref}
                     className={`${styles.tableWrapper1} ${
@@ -559,8 +609,15 @@ const PlayerSeasons = () => {
 
                 <h2
                     ref={subtitleRefP}
-                    className={`${styles.subtitle}`}
-                >{`Playoff Stats`}</h2>
+                    className={`${styles.subtitle} ${
+                        status !== "Received" ||
+                        (playerData &&
+                            playerData.career_stats_playoffs &&
+                            playerData.career_stats_playoffs.length === 0)
+                            ? styles.hidden
+                            : ""
+                    }`}
+                >{`Playoff Career Stats`}</h2>
                 <div
                     ref={wrapper1RefP}
                     className={`${styles.tableWrapper1} ${
@@ -646,7 +703,7 @@ const PlayerSeasons = () => {
                     {player && (
                         <>
                             <h1 className={styles.playerName}>
-                                {player.full_name} Stats
+                                {player.full_name} Career Stats
                             </h1>
                             <Link
                                 className={styles.playerLink}

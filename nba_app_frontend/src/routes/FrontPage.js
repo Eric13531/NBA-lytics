@@ -243,6 +243,7 @@ const Home = () => {
                     </div>
                 </h1>
                 <PlayerSearchForm />
+                <div style={{height:'2em'}}></div>
                 <TeamSearchForm/>
             </div>
         </>

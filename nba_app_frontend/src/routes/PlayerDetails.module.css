@@ -30,6 +30,57 @@
     margin-bottom: 7px;
 }
 
+.profile{
+    display: flex;
+    flex-direction: row;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+
+
+/* Original size is 190px height, 260px width*/
+/* scaled to 4/5 size */
+.profileImageContainer{
+    width: 171px;
+    height: 171px;
+    overflow: hidden;
+}
+
+.profileImage{
+    transform: translate(-31.5px, -0%);
+    height: 171px;
+}
+
+.blankImage{
+    height: 171px;
+}
+
+.profileData {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 2em;
+    margin-right: 2em;
+}
+
+.profileName{
+    font-size: 2.05em;
+    margin-bottom: 0.28em;
+}
+
+.profileText{
+    font-size: 0.9em;
+}
+
 /* style={{ fontWeight: "bold" }}
 
 style={{ display: "flex", flexDirection: "row", justifyContent: "start", alignContent: 'start' ,alignItems: 'flex-start', flexWrap: 'wrap' }} */
+
+.horizontalLine {
+    width: 100%; /* Set the width of the line to fill the container */
+    height: 1px; /* Set the height of the line */
+    background-color: rgba(0, 0, 0, 0.25); /* Set the color of the line */
+    margin-bottom: 2.5em;
+    margin-top: 1em;
+  }

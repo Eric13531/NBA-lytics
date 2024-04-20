@@ -27,6 +27,9 @@ requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='stats.nba.com', port=
 // FOr search, add autocomplete (the first value in suggestions)
 // Add more support for search suggestions (state, city, nickname, abbreviation)
 // get_palyer_id is incorrect: What if name is prefix of different name?
+// ONLY ACCEPT IF NAME IS EXACTLY THE SAME OR ONLY ONE RESULT
+// FIX SUBTITLE LOADING FIRST IN CAREER
+// FIX HEADERS FOR TEAMS AND CAREER (EG YEAR MISSING)
 
 - Make drop list for form to recommend players
 - Return table of stats for players

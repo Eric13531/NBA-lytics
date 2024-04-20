@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import axios from "axios";
 import styles from "./TeamSeasons.module.css";
 import {
-    seasonHeaderMapping,
+    teamSeasonHeaderMapping,
     headerMeaning,
     defaultHeaders,
 } from "../helper/constants";
@@ -79,12 +79,12 @@ const TeamSeasons = () => {
         };
 
         function reduceToOneDecimal(num) {
-            if (Math.floor(num).toString().length >= 3) {
-                return Math.floor(num);
-            } else {
-                let roundedNum = Math.round(num * 10) / 10;
-                return roundedNum % 1 === 0 ? roundedNum + ".0" : roundedNum;
-            }
+            // if (Math.floor(num).toString().length >= 3) {
+            //     return Math.floor(num);
+            // } else {
+            let roundedNum = Math.round(num * 10) / 10;
+            return roundedNum % 1 === 0 ? roundedNum + ".0" : roundedNum;
+            // }
         }
 
         function formatNumberWithThreeDecimals(number) {
@@ -191,21 +191,20 @@ const TeamSeasons = () => {
                     console.log("Header: ", response.data.team_career_stats);
                     for (
                         let index = 0;
-                        index <
-                        response.data.team_career_stats.headers.length;
+                        index < response.data.team_career_stats.headers.length;
                         index++
                     ) {
                         const header =
                             response.data.team_career_stats.headers[index];
                         if (
-                            seasonHeaderMapping.hasOwnProperty(header) &&
-                            seasonHeaderMapping[header] !== "N/A"
+                            teamSeasonHeaderMapping.hasOwnProperty(header) &&
+                            teamSeasonHeaderMapping[header] !== "N/A"
                         ) {
-                            newHeaders.push(seasonHeaderMapping[header]);
+                            newHeaders.push(teamSeasonHeaderMapping[header]);
                             // indexArray.push(index)
                             indexArray[index] = header;
 
-                            newHeadersT.push(seasonHeaderMapping[header]);
+                            newHeadersT.push(teamSeasonHeaderMapping[header]);
                             indexArrayT[index] = header;
                         }
                     }
@@ -213,8 +212,7 @@ const TeamSeasons = () => {
                     for (
                         let index = 0;
                         index <
-                        response.data.team_career_stats.headers_playoffs
-                            .length;
+                        response.data.team_career_stats.headers_playoffs.length;
                         index++
                     ) {
                         const header =
@@ -222,10 +220,10 @@ const TeamSeasons = () => {
                                 index
                             ];
                         if (
-                            seasonHeaderMapping.hasOwnProperty(header) &&
-                            seasonHeaderMapping[header] !== "N/A"
+                            teamSeasonHeaderMapping.hasOwnProperty(header) &&
+                            teamSeasonHeaderMapping[header] !== "N/A"
                         ) {
-                            newHeadersP.push(seasonHeaderMapping[header]);
+                            newHeadersP.push(teamSeasonHeaderMapping[header]);
                             // indexArray.push(index)
                             indexArrayP[index] = header;
                         }
@@ -250,11 +248,29 @@ const TeamSeasons = () => {
                         ) {
                             if (indexArray.hasOwnProperty(stat_idx)) {
                                 const headerName =
-                                    seasonHeaderMapping[
-                                        response.data.team_career_stats
-                                            .headers[stat_idx]
+                                    teamSeasonHeaderMapping[
+                                        response.data.team_career_stats.headers[
+                                            stat_idx
+                                        ]
                                     ];
-                                if (headerName === "MIN") {
+                                if (
+                                    headerName === "MIN" ||
+                                    headerName === "FGM" ||
+                                    headerName === "FGA" ||
+                                    headerName === "3PM" ||
+                                    headerName === "EPA" ||
+                                    headerName === "FTA" ||
+                                    headerName === "FTM" ||
+                                    headerName === "ORB" ||
+                                    headerName === "DRB" ||
+                                    headerName === "TRB" ||
+                                    headerName === "AST" ||
+                                    headerName === "STL" ||
+                                    headerName === "BLK" ||
+                                    headerName === "TOV" ||
+                                    headerName === "PF" ||
+                                    headerName === "PTS"
+                                ) {
                                     game[stat_idx] = reduceToOneDecimal(
                                         game[stat_idx]
                                     );
@@ -276,9 +292,8 @@ const TeamSeasons = () => {
                                 gameArray.push(game[stat_idx]);
                             }
                         }
-                        response.data.team_career_stats.career_stats[
-                            game_idx
-                        ] = gameArray;
+                        response.data.team_career_stats.career_stats[game_idx] =
+                            gameArray;
                     }
 
                     for (
@@ -300,11 +315,29 @@ const TeamSeasons = () => {
                         ) {
                             if (indexArrayP.hasOwnProperty(stat_idx)) {
                                 const headerName =
-                                    seasonHeaderMapping[
-                                        response.data.team_career_stats
-                                            .headers[stat_idx]
+                                    teamSeasonHeaderMapping[
+                                        response.data.team_career_stats.headers[
+                                            stat_idx
+                                        ]
                                     ];
-                                if (headerName === "MIN") {
+                                if (
+                                    headerName === "MIN" ||
+                                    headerName === "FGM" ||
+                                    headerName === "FGA" ||
+                                    headerName === "3PM" ||
+                                    headerName === "EPA" ||
+                                    headerName === "FTA" ||
+                                    headerName === "FTM" ||
+                                    headerName === "ORB" ||
+                                    headerName === "DRB" ||
+                                    headerName === "TRB" ||
+                                    headerName === "AST" ||
+                                    headerName === "STL" ||
+                                    headerName === "BLK" ||
+                                    headerName === "TOV" ||
+                                    headerName === "PF" ||
+                                    headerName === "PTS"
+                                ) {
                                     game[stat_idx] = reduceToOneDecimal(
                                         game[stat_idx]
                                     );
@@ -330,7 +363,7 @@ const TeamSeasons = () => {
                             game_idx
                         ] = gameArray;
                     }
-                    
+
                     // TODO: Implement Regular season + Playoff combined averages
                     // for (
                     //     let game_idx = 0;
@@ -391,10 +424,9 @@ const TeamSeasons = () => {
                     if (
                         response.data.team_career_stats &&
                         response.data.team_career_stats.career_stats &&
-                        response.data.team_career_stats.career_stats
-                            .length === 0 &&
-                        response.data.team_career_stats
-                            .career_stats_playoffs &&
+                        response.data.team_career_stats.career_stats.length ===
+                            0 &&
+                        response.data.team_career_stats.career_stats_playoffs &&
                         response.data.team_career_stats.career_stats_playoffs
                             .length === 0
                     ) {
@@ -412,7 +444,7 @@ const TeamSeasons = () => {
                 } catch (error) {
                     console.log(error.message);
                     if (
-                        error.message ===
+                        error.response.data.error ===
                         "We couldn't process the request. Please reload or try again later"
                     ) {
                         console.log("API DOWN");
@@ -479,8 +511,15 @@ const TeamSeasons = () => {
                 {/* REGULAR SEASON DATA*/}
                 <h2
                     ref={subtitleRef}
-                    className={`${styles.subtitle}`}
-                >{`Regular Season Stats`}</h2>
+                    className={`${styles.subtitle} ${
+                        status !== "Received" ||
+                        (teamData &&
+                            teamData.career_stats &&
+                            teamData.career_stats.length) === 0
+                            ? styles.hidden
+                            : ""
+                    }`}
+                >{`Regular Season Historial Stats`}</h2>
                 <div
                     ref={wrapper1Ref}
                     className={`${styles.tableWrapper1} ${
@@ -559,8 +598,15 @@ const TeamSeasons = () => {
 
                 <h2
                     ref={subtitleRefP}
-                    className={`${styles.subtitle}`}
-                >{`Playoff Stats`}</h2>
+                    className={`${styles.subtitle} ${
+                        status !== "Received" ||
+                        (teamData &&
+                            teamData.career_stats_playoffs &&
+                            teamData.career_stats_playoffs.length) === 0
+                            ? styles.hidden
+                            : ""
+                    }`}
+                >{`Playoff Historial Stats`}</h2>
                 <div
                     ref={wrapper1RefP}
                     className={`${styles.tableWrapper1} ${
@@ -646,7 +692,7 @@ const TeamSeasons = () => {
                     {team && (
                         <>
                             <h1 className={styles.playerName}>
-                                {team.full_name} Stats
+                                {team.full_name} Historial Stats
                             </h1>
                             <Link
                                 className={styles.playerLink}

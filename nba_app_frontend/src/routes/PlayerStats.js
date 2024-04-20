@@ -360,7 +360,7 @@ const PlayerStats = () => {
                 } catch (error) {
                     console.log(error.message);
                     if (
-                        error.message ===
+                        error.response.data.error ===
                         "We couldn't process the request. Please reload or try again later"
                     ) {
                         console.log("API DOWN");
@@ -430,7 +430,7 @@ const PlayerStats = () => {
                         playerData &&
                         playerData.game_stats &&
                         playerData.game_stats.length === 0) ? styles.hidden : ""
-                    }`}>{`${season}-${(parseInt(season) + 1) % 100 < 10 ? "0" : ""}${(parseInt(season) + 1) % 100} Regular Season`}</h2>
+                    }`}>{`${season}-${(parseInt(season) + 1) % 100 < 10 ? "0" : ""}${(parseInt(season) + 1) % 100} Regular Season Games`}</h2>
                 <div
                     ref={wrapper1Ref}
                     className={`${styles.tableWrapper1} ${
@@ -512,7 +512,7 @@ const PlayerStats = () => {
                         playerData &&
                         playerData.game_stats_playoffs &&
                         playerData.game_stats_playoffs.length === 0) ? styles.hidden : ""
-                    }`}>{`${season}-${(parseInt(season) + 1) % 100 < 10 ? "0" : ""}${(parseInt(season) + 1) % 100} Playoffs`}</h2>
+                    }`}>{`${season}-${(parseInt(season) + 1) % 100 < 10 ? "0" : ""}${(parseInt(season) + 1) % 100} Playoffs Games`}</h2>
                 <div
                     ref={wrapper1RefP}
                     className={`${styles.tableWrapper1} ${
@@ -596,7 +596,7 @@ const PlayerStats = () => {
                     {player && (
                         <>
                             <h1 className={styles.playerName}>
-                                {player.full_name} Stats
+                                {player.full_name} Game Logs
                             </h1>
                             <Link
                                 className={styles.playerLink}

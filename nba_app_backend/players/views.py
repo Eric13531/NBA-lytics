@@ -7,7 +7,7 @@ import json
 from django.http import JsonResponse
 from requests.exceptions import ReadTimeout
 
-from nba_api.stats.endpoints import playercareerstats, playergamelog, playergamelogs, teamgamelogs, teamyearbyyearstats
+from nba_api.stats.endpoints import playercareerstats, playergamelog, playergamelogs, teamgamelogs, teamyearbyyearstats, commonplayerinfo
 from nba_api.stats.static import players, teams
 
 game_stat_headers = [
@@ -145,6 +145,37 @@ def get_player_info_from_id(request):
                 {"error": f"The NBA API is under maintenance at the moment. Please try again later"}, status=500
             )
         except Exception as e:
+            return JsonResponse(
+                {"error": f"Failed to fetch search results: {e}"}, status=500
+            )
+            
+def get_player_advanced_info_from_id(request):
+    if request.method == "GET":
+        player_id = request.GET.get("player_id")
+        print(player_id)
+        print(type(player_id))
+        player_info = commonplayerinfo.CommonPlayerInfo(int(player_id)).get_dict()
+        birthdate = player_info['resultSets'][0]['rowSet'][0][7].split('T')[0]
+        country = player_info['resultSets'][0]['rowSet'][0][9]
+        height = player_info['resultSets'][0]['rowSet'][0][11]
+        weight = player_info['resultSets'][0]['rowSet'][0][12]
+        height_val = (int(height.split('-')[0])*12 + int(height.split('-')[1]))
+        height_cm = int(height_val * 2.54)
+        weight_kg = int(int(weight) * 0.453592)
+        jersey = player_info['resultSets'][0]['rowSet'][0][14]
+        position = player_info['resultSets'][0]['rowSet'][0][15]
+        print(player_info['resultSets'][0]['rowSet'][0])
+        player_common_info = {'birthdate': birthdate, 'country': country, 'height': height, 'weight': weight, 'height_cm': height_cm, 'weight_kg': weight_kg, 'position': position}
+        # assert that only one player returned?
+        try:
+            return JsonResponse({"player_common_info": player_common_info})
+        except ReadTimeout as e:
+            print("API DOWN")
+            return JsonResponse(
+                {"error": f"The NBA API is under maintenance at the moment. Please try again later"}, status=500
+            )
+        except Exception as e:
+            print(e)
             return JsonResponse(
                 {"error": f"Failed to fetch search results: {e}"}, status=500
             )
@@ -317,7 +348,7 @@ def get_all_team_game_stats(request):
             team_game_stats['headers'] = stats.get_dict()['resultSets'][0]['headers']
             team_game_stats['headers_playoffs'] = playoff_stats.get_dict()['resultSets'][0]['headers']
             
-            print(playoff_stats.get_dict()['resultSets'][0]['headers'])
+            print("TEAM GAME STATS HEADERS", playoff_stats.get_dict()['resultSets'][0]['headers'])
             
             if len(stats.get_dict()['resultSets'][0]['rowSet']) == 0:
                 print("Team played no games this season?")
@@ -379,6 +410,7 @@ def get_player_career_averages(request):
             player_career_stats['career_stats_playoffs'] = playoff_career['rowSet']
             
             print("RETURN DETAILS")
+            print(regular_season_career['headers'])
             return JsonResponse({"player_career_stats": player_career_stats})
         except ReadTimeout as e:
             print("API DOWN")
@@ -411,6 +443,7 @@ def get_team_career_averages(request):
             team_career_stats['career_stats_playoffs'] = playoff_career['rowSet']
             
             print("RETURN DETAILS")
+            print("TEAM CAREER HEADERS", regular_season_career['headers'])
             return JsonResponse({"team_career_stats": team_career_stats})
         except ReadTimeout as e:
             print("API DOWN")
