@@ -8,12 +8,17 @@ const TeamDetails = () => {
     const { teamId } = useParams();
     const [team, setTeam] = useState(null);
     const [yearRange, setYearRange] = useState([]);
+    const [imageUrl, setImageUrl] = useState(null);
+    const [teamInfo, setTeamInfo] = useState(null);
+    const [status, setStatus] = useState("loading");
 
     useEffect(() => {
         (async () => {
             setYearRange([]);
             console.log(teamId);
             try {
+                setStatus("loading");
+                setImageUrl(`/team_pictures/${teamId}.svg`);
                 const response = await axios.get(
                     "http://localhost:8000/api/players/get_team_info_from_id/",
                     {
@@ -24,9 +29,7 @@ const TeamDetails = () => {
                 const first_year = parseInt(
                     team_info.first_season.split("-")[0]
                 );
-                const last_year = parseInt(
-                    team_info.last_season.split("-")[0]
-                );
+                const last_year = parseInt(team_info.last_season.split("-")[0]);
                 let years = [];
 
                 for (let year = first_year; year <= last_year; year++) {
@@ -37,11 +40,21 @@ const TeamDetails = () => {
                     );
                 }
 
+                const info_response = await axios.get(
+                    "http://localhost:8000/api/players/get_team_advanced_info_from_id/",
+                    {
+                        params: { team_id: teamId },
+                    }
+                );
+                const team_common_info = info_response.data.team_common_info;
+                console.log(team_common_info);
+                setTeamInfo(team_common_info);
                 console.log(team_info);
                 setTeam(team_info);
                 setYearRange(years);
             } catch (error) {
                 console.error("Error fetching team data:", error);
+                setStatus("Error");
             }
         })();
     }, [teamId]);
@@ -52,10 +65,47 @@ const TeamDetails = () => {
             <div className={styles.playerBody}>
                 {team && (
                     <>
-                        <h1>{team.full_name}</h1>
-                        <h2>Still Active: {team.is_active ? "YES" : "NO"}</h2>
-                        <Link to={'season'}><div className={styles.gameLogTitle}>Season Averages</div></Link>
+                        <div className={styles.profile}>
+                            <div className={styles.profileImageContainer}>
+                                <img
+                                    src={imageUrl}
+                                    alt={team.full_name}
+                                    className={styles.profileImage}
+                                ></img>
+                            </div>
+                            <div className={styles.profileData}>
+                                <h1 className={styles.profileName}>
+                                    {team.full_name}
+                                </h1>
+                                <div className={styles.profileText}>
+                                    Abbreviation: {teamInfo.abb}
+                                </div>
+                                <div className={styles.profileText}>
+                                    Location: {teamInfo.city}, {teamInfo.state}
+                                </div>
+                                <div className={styles.profileText}>
+                                    Conference-Division: {teamInfo.conference}-
+                                    {teamInfo.division}
+                                </div>
+                                <div className={styles.profileText}>
+                                    First Season: {teamInfo.first_season}
+                                </div>
+                                <div className={styles.profileText}>
+                                    Championships: {teamInfo.championships}
+                                </div>
+                                {/* <h2>
+                                Still Active: {player.is_active ? "YES" : "NO"}
+                            </h2> */}
+                            </div>
+                        </div>
+                        <div className={styles.horizontalLine}></div>
                         <div className={styles.gameLogBody}>
+                            <div className={styles.gameLogTitle}>
+                                <Link to={"season"}>Accolades</Link>
+                            </div>
+                            <div className={styles.gameLogTitle}>
+                                <Link to={"season"}>Season Averages</Link>
+                            </div>
                             <div className={styles.gameLogTitle}>
                                 Game Logs:
                             </div>
@@ -75,7 +125,8 @@ const TeamDetails = () => {
                         </div>
                     </>
                 )}
-                {!team && <h1>Loading...</h1>}
+                {!team && status === "loading" && <h1>Loading...</h1>}
+                {!team && status === "Error" && <h1>Error Response</h1>}
             </div>
         </div>
     );

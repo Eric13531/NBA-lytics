@@ -7,7 +7,7 @@ import json
 from django.http import JsonResponse
 from requests.exceptions import ReadTimeout
 
-from nba_api.stats.endpoints import playercareerstats, playergamelog, playergamelogs, teamgamelogs, teamyearbyyearstats, commonplayerinfo
+from nba_api.stats.endpoints import playercareerstats, playergamelog, playergamelogs, teamgamelogs, teamyearbyyearstats, commonplayerinfo, teamdetails
 from nba_api.stats.static import players, teams
 
 game_stat_headers = [
@@ -169,6 +169,41 @@ def get_player_advanced_info_from_id(request):
         # assert that only one player returned?
         try:
             return JsonResponse({"player_common_info": player_common_info})
+        except ReadTimeout as e:
+            print("API DOWN")
+            return JsonResponse(
+                {"error": f"The NBA API is under maintenance at the moment. Please try again later"}, status=500
+            )
+        except Exception as e:
+            print(e)
+            return JsonResponse(
+                {"error": f"Failed to fetch search results: {e}"}, status=500
+            )
+            
+def get_team_advanced_info_from_id(request):
+    from .constants import nba_teams
+    if request.method == "GET":
+        team_id = request.GET.get("team_id")
+        print(team_id)
+        print(type(team_id))
+        team_info = teams.find_team_name_by_id(int(team_id))
+        team_advanced_info = teamdetails.TeamDetails(int(team_id)).get_dict()
+        
+        year_founded = team_advanced_info['resultSets'][0]['rowSet'][0][3]
+        print(team_advanced_info['resultSets'][0]['rowSet'][0])
+        first_season, last_season = get_first_and_last_season_teams(team_id)
+        
+        championships = len(team_advanced_info['resultSets'][3]['rowSet'])
+        print(nba_teams[team_info['full_name'].lower()])
+        conference = nba_teams[team_info['full_name'].lower()]['conference']
+        division = nba_teams[team_info['full_name'].lower()]['division'].capitalize()
+        city = team_info['city']
+        state = team_info['state']
+        abb = team_info['abbreviation']
+        team_common_info = {'championships': championships, 'first_season': first_season, 'conference': conference, 'division': division, 'city':city , 'state': state, 'abb': abb}
+        # assert that only one team returned?
+        try:
+            return JsonResponse({"team_common_info": team_common_info})
         except ReadTimeout as e:
             print("API DOWN")
             return JsonResponse(

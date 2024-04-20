@@ -26,7 +26,7 @@ requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='stats.nba.com', port=
 // Extra: Change columns to follow same template all the time, regardless of whether the column is there or not
 // FOr search, add autocomplete (the first value in suggestions)
 // Add more support for search suggestions (state, city, nickname, abbreviation)
-// get_palyer_id is incorrect: What if name is prefix of different name?
+// get_player_id is incorrect: What if name is prefix of different name?
 // ONLY ACCEPT IF NAME IS EXACTLY THE SAME OR ONLY ONE RESULT
 // FIX SUBTITLE LOADING FIRST IN CAREER
 // FIX HEADERS FOR TEAMS AND CAREER (EG YEAR MISSING)
@@ -46,6 +46,8 @@ Also have row for all-time stats and career/current year stats?
 - Make feature to see recent tweets/comments about player
 - Maybe incorporate highights and videos/clips?
 */
+
+// Make combined search field?
 
 // TODO: Handle wrong year in stats table, change error code
 // TODO: Separate regular season and playoff games

@@ -10,13 +10,15 @@ const PlayerDetails = () => {
     const [yearRange, setYearRange] = useState([]);
 
     const [imageUrl, setImageUrl] = useState(null);
-    const [playerInfo, setPlayerInfo] = useState(null)
+    const [playerInfo, setPlayerInfo] = useState(null);
+    const [status, setStatus] = useState("loading");
 
     useEffect(() => {
         (async () => {
             setYearRange([]);
             console.log(playerId);
             try {
+                setStatus("loading");
                 setImageUrl(`/player_pictures/${playerId}.png`);
                 const response = await axios.get(
                     "http://localhost:8000/api/players/get_player_info_from_id/",
@@ -46,21 +48,23 @@ const PlayerDetails = () => {
                         params: { player_id: playerId },
                     }
                 );
-                const player_common_info = info_response.data.player_common_info
-                console.log(player_common_info)
-                setPlayerInfo(player_common_info)
+                const player_common_info =
+                    info_response.data.player_common_info;
+                console.log(player_common_info);
+                setPlayerInfo(player_common_info);
 
                 console.log(player_info);
                 setPlayer(player_info);
                 setYearRange(years);
             } catch (error) {
                 console.error("Error fetching player data:", error);
+                setStatus("Error");
             }
         })();
     }, [playerId]);
 
     const handleImageError = () => {
-        console.log("ERROR", imageUrl)
+        console.log("ERROR", imageUrl);
         setImageUrl("/blank_person.jpg");
     };
 
@@ -75,28 +79,52 @@ const PlayerDetails = () => {
                                 <img
                                     src={imageUrl}
                                     alt={player.full_name}
-                                    className={imageUrl === "/blank_person.jpg" ? styles.blankImage : styles.profileImage}
+                                    className={
+                                        imageUrl === "/blank_person.jpg"
+                                            ? styles.blankImage
+                                            : styles.profileImage
+                                    }
                                     onError={handleImageError}
                                 ></img>
                             </div>
                             <div className={styles.profileData}>
-                            <h1 className={styles.profileName}>{player.full_name}</h1>
-                            <div className={styles.profileText}>Birthdate: {playerInfo.birthdate}</div>
-                            <div className={styles.profileText}>Country: {playerInfo.country}</div>
-                            <div className={styles.profileText}>Height: {playerInfo.height} ({playerInfo.height_cm}cm)</div>
-                            <div className={styles.profileText}>Weight: {playerInfo.weight}lbs ({playerInfo.weight_kg}kg)</div>
-                            {/* <h2>
+                                <h1 className={styles.profileName}>
+                                    {player.full_name}
+                                </h1>
+                                <div
+                                    style={{ fontWeight: "700" }}
+                                    className={styles.profileText}
+                                >
+                                    Still Active:{" "}
+                                    {player.is_active ? "YES" : "NO"}
+                                </div>
+                                <div className={styles.profileText}>
+                                    Birthdate: {playerInfo.birthdate}
+                                </div>
+                                <div className={styles.profileText}>
+                                    Country: {playerInfo.country}
+                                </div>
+                                <div className={styles.profileText}>
+                                    Height: {playerInfo.height} (
+                                    {playerInfo.height_cm}cm)
+                                </div>
+                                <div className={styles.profileText}>
+                                    Weight: {playerInfo.weight}lbs (
+                                    {playerInfo.weight_kg}kg)
+                                </div>
+                                {/* <h2>
                                 Still Active: {player.is_active ? "YES" : "NO"}
                             </h2> */}
                             </div>
                         </div>
                         <div className={styles.horizontalLine}></div>
-                        <Link to={"season"}>
-                            <div className={styles.gameLogTitle}>
-                                Season Averages
-                            </div>
-                        </Link>
                         <div className={styles.gameLogBody}>
+                            <div className={styles.gameLogTitle}>
+                                <Link to={"season"}>Accolades</Link>
+                            </div>
+                            <div className={styles.gameLogTitle}>
+                                <Link to={"season"}>Season Averages</Link>
+                            </div>
                             <div className={styles.gameLogTitle}>
                                 Game Logs:
                             </div>
@@ -116,7 +144,8 @@ const PlayerDetails = () => {
                         </div>
                     </>
                 )}
-                {!player && <h1>Loading...</h1>}
+                {!player && status === "loading" && <h1>Loading...</h1>}
+                {!player && status === "Error" && <h1>Error Response</h1>}
             </div>
         </div>
     );
