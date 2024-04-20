@@ -16,6 +16,7 @@ def get_ids():
     return ids
 
 # Get player headshot from player id
+# You must be inside the nba_app_backend directory
 def get_picture_from_id(id, dir, fileName=None):
     if not fileName:
         fileName = f"{id}.png"
@@ -32,7 +33,7 @@ def get_picture_from_id(id, dir, fileName=None):
         print(f"Error: {id} is not a valid player id")
 
 # Get all player headshots from players.txt
-def get_all_player_pictures(dir = 'resources/player_pictures'):
+def get_all_player_pictures(dir = '../nba_app_frontend/public/player_pictures'):
     ids = get_ids()
     for id in ids:
         get_picture_from_id(id, dir)
