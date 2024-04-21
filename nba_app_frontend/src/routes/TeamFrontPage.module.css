@@ -1,0 +1,106 @@
+.header {
+    height: 500px;
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.websiteName {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.websiteNamep1 {
+    color: 	#1D428A
+}
+
+.websiteNamep2 {
+    color: #C8102E
+}
+
+.searchForm {
+    margin-top: 0.2em;
+    font-size: 1.2em;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    width: min(30em, 80%);
+}
+
+.searchLabel {
+    font-weight: bold;
+    margin-bottom: 0.25em;
+    font-size: 1.4em;
+}
+
+.searchInput {
+    /* font-weight: bold; */
+    /* height: 1.2em; */
+    border-style:none;
+    font-size: 1em;
+    margin-left: 5px;
+    width: 90%;
+    height: 85%;
+}
+
+.searchSubmit {
+    /* font-weight: bold; */
+    width: 3em;
+    height: 3em;
+    margin-right: 3px;
+    border-style: none;
+    border-radius: 10px;
+    margin-right: 3px;
+}
+
+.searchContent {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:space-between;
+    font-weight: bold;
+    border: black;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 0px;
+    display: flex;
+    height: 45px;
+    width: 100%;
+}
+
+.searchImage {
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.searchResults {
+    list-style-type: none;
+    padding-inline-start: 0px;
+    width: 100%;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 0px;
+    margin-top: 0px;
+    border-radius: 0px;
+}
+
+.searchResult {
+    width: 100%;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    margin-left: 5px;
+}
+
+.searchExtra {
+    width: 100%;
+    margin-top: -0.2em;
+    padding-bottom: 0.2em;
+    margin-left: 5px;
+}

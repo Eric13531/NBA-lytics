@@ -100,11 +100,11 @@ const TeamDetails = () => {
                         </div>
                         <div className={styles.horizontalLine}></div>
                         <div className={styles.gameLogBody}>
-                            <div className={styles.gameLogTitle}>
+                            {/* <div className={styles.gameLogTitle}>
                                 <Link to={"season"}>Accolades</Link>
-                            </div>
+                            </div> */}
                             <div className={styles.gameLogTitle}>
-                                <Link to={"season"}>Season Averages</Link>
+                                <Link to={"season"}>Season Statistics</Link>
                             </div>
                             <div className={styles.gameLogTitle}>
                                 Game Logs:

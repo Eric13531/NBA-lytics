@@ -18,7 +18,7 @@
     font-size: x-large;
     padding: 20px;
     padding-top: 1em;
-    margin-left: 4em;
+    margin-left: 1em;
     /* margin-block-start: 0.67em;
     margin-block-end: 0.67em;
     margin-inline-start: 0px;
@@ -28,6 +28,7 @@
 .navList li {
     display: inline;
     margin-right: 10px;
+    margin-left: 1.5em;
 }
 
 .navList li a {
@@ -39,6 +40,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin-left: 30px;
 }
 
 .websiteNamep1 {

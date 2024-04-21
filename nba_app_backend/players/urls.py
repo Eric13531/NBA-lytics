@@ -14,4 +14,6 @@ urlpatterns = [
     path('get_team_career_averages/', views.get_team_career_averages, name='get_team_career_averages'),
     path('get_player_advanced_info_from_id/', views.get_player_advanced_info_from_id, name='get_player_advanced_info_from_id'),
     path('get_team_advanced_info_from_id/', views.get_team_advanced_info_from_id, name='get_team_advanced_info_from_id'),
+    path('get_player_awards/', views.get_player_awards, name='get_player_awards'),
+    # path('get_team_awards/', views.get_team_awards, name='get_team_awards'),
 ]

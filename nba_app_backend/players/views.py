@@ -7,7 +7,7 @@ import json
 from django.http import JsonResponse
 from requests.exceptions import ReadTimeout
 
-from nba_api.stats.endpoints import playercareerstats, playergamelog, playergamelogs, teamgamelogs, teamyearbyyearstats, commonplayerinfo, teamdetails
+from nba_api.stats.endpoints import playercareerstats, playergamelog, playergamelogs, teamgamelogs, teamyearbyyearstats, commonplayerinfo, teamdetails, playerawards
 from nba_api.stats.static import players, teams
 
 game_stat_headers = [
@@ -488,6 +488,50 @@ def get_team_career_averages(request):
         except Exception as e:
             # print("ERROR HERE", e)
             # print(e)
+            import traceback
+            print("ERROR HERE:", repr(e))
+            traceback.print_exc()
+            return JsonResponse(
+                {"error": f"Failed to fetch search results: {e}"}, status=500
+            )
+            
+def get_player_awards(request):
+    if request.method == "GET":
+        try:
+            player_id = request.GET.get("player_id")
+            
+            player_awards = playerawards.PlayerAwards(player_id=player_id).get_dict()['resultSets'][0]
+            award_set = {'All-Defensive Team': [],
+                'All-NBA': [],
+                'All-Rookie Team': [],
+                'Hall of Fame Inductee': [],
+                'IBM Award': [],
+                'NBA All-Star Most Valuable Player': [],
+                'NBA Defensive Player of the Year': [],
+                'NBA Finals Most Valuable Player': [],
+                'NBA Most Valuable Player': [],
+                'NBA Player of the Month': [],
+                'NBA Player of the Week': [],
+                'NBA Rookie of the Month': [],
+                'NBA Rookie of the Year': [],
+                'NBA Sporting News Most Valuable Player of the Year': [],
+                'NBA Sporting News Rookie of the Year': [],
+                'Olympic Gold Medal': []}
+
+            for row in player_awards['rowSet']:
+                
+                if row[4] in award_set:
+                    award_set[row[4]].append(row[6])
+            
+            print("AWARDS: ", award_set)
+            # print("AWARDS: ", player_awards['rowSet'][0])
+            return JsonResponse({"award_set": award_set})
+        except ReadTimeout as e:
+            print("API DOWN")
+            return JsonResponse(
+                {"error": f"We couldn't process the request. Please reload or try again later"}, status=500
+            )
+        except Exception as e:
             import traceback
             print("ERROR HERE:", repr(e))
             traceback.print_exc()

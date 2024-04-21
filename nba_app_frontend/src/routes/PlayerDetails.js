@@ -120,7 +120,7 @@ const PlayerDetails = () => {
                         <div className={styles.horizontalLine}></div>
                         <div className={styles.gameLogBody}>
                             <div className={styles.gameLogTitle}>
-                                <Link to={"season"}>Accolades</Link>
+                                <Link to={"award"}>Accolades</Link>
                             </div>
                             <div className={styles.gameLogTitle}>
                                 <Link to={"season"}>Season Averages</Link>

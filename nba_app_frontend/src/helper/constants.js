@@ -394,3 +394,20 @@ export const defaultHeaders = [
     "PTS",
     "+/-",
 ];
+
+export const awardMapping = {'All-Defensive Team': 'All-Defensive Team',
+'All-NBA': 'All-NBA',
+'All-Rookie Team': 'All-Rookie Team',
+'Hall of Fame Inductee': 'Hall of Fame',
+'IBM Award': 'N/A',
+'NBA All-Star Most Valuable Player': 'All-Star Most Valuable Player',
+'NBA Defensive Player of the Year': 'Defensive Player of the Year',
+'NBA Finals Most Valuable Player': 'Finals Most Valuable Player',
+'NBA Most Valuable Player': 'Most Valuable Player',
+'NBA Player of the Month': 'Player of the Month',
+'NBA Player of the Week': 'Player of the Week',
+'NBA Rookie of the Month': 'Rookie of the Month',
+'NBA Rookie of the Year': 'Rookie of the Year',
+'NBA Sporting News Most Valuable Player of the Year': 'N/A',
+'NBA Sporting News Rookie of the Year': 'N/A',
+'Olympic Gold Medal': 'Olympic Gold Medal'}
