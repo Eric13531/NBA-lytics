@@ -3,6 +3,8 @@ import styles from "./StatsTable.module.css"; // Import CSS Module for styling
 import axios from "axios";
 import { headerMapping, headerMeaning } from "../helper/constants";
 
+const deploymentStatus = process.env.REACT_APP_DEPLOYMENTSTATUS;
+
 const StatsTable = ({ playerId, season }) => {
     const [playerData, setPlayerData] = useState(null);
     const defaultHeaders = ["Year", "Tm"];
@@ -75,12 +77,31 @@ const StatsTable = ({ playerId, season }) => {
             setPlayerData(null)
             setShouldHide(false)
             try {
-                const response = await axios.get(
-                    "http://localhost:8000/api/players/get_all_player_game_stats/",
-                    {
-                        params: { player_id: playerId, season: season },
-                    }
-                );
+                let response = null
+                if (deploymentStatus === "production") {
+                    response = await axios.get(
+                        // "http://localhost:8000/api/players/get_all_player_game_stats/",
+                        "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_all_player_game_stats/",
+                        {
+                            params: { player_id: playerId, season: season },
+                        }
+                    );
+                } else if (deploymentStatus === "development") {
+                    response = await axios.get(
+                        "http://localhost:8000/api/players/get_all_player_game_stats/",
+                        // "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_all_player_game_stats/",
+                        {
+                            params: { player_id: playerId, season: season },
+                        }
+                    );
+                }
+                // const response = await axios.get(
+                //     "http://localhost:8000/api/players/get_all_player_game_stats/",
+                //     // "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_all_player_game_stats/",
+                //     {
+                //         params: { player_id: playerId, season: season },
+                //     }
+                // );
                 // setIndices([])
                 const newHeaders = [];
                 const indexArray = {};

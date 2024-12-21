@@ -5,6 +5,8 @@ import axios from "axios";
 import styles from "./PlayerAwards.module.css";
 import { awardMapping } from "../helper/constants";
 
+const deploymentStatus = process.env.REACT_APP_DEPLOYMENTSTATUS;
+
 const PlayerAwards = () => {
     const { playerId } = useParams();
     const [player, setPlayer] = useState(null);
@@ -22,12 +24,31 @@ const PlayerAwards = () => {
             try {
                 setHasAwards(false)
                 setStatus("loading");
-                const response = await axios.get(
-                    "http://localhost:8000/api/players/get_player_info_from_id/",
-                    {
-                        params: { player_id: playerId },
-                    }
-                );
+                let response = null
+                if (deploymentStatus === "production") {
+                    response = await axios.get(
+                        // "http://localhost:8000/api/players/get_player_info_from_id/",
+                        "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_player_info_from_id/",
+                        {
+                            params: { player_id: playerId },
+                        }
+                    );
+                } else if (deploymentStatus === "development") {
+                    response = await axios.get(
+                        "http://localhost:8000/api/players/get_player_info_from_id/",
+                        // "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_player_info_from_id/",
+                        {
+                            params: { player_id: playerId },
+                        }
+                    );
+                }
+                // const response = await axios.get(
+                //     "http://localhost:8000/api/players/get_player_info_from_id/",
+                //     // "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_player_info_from_id/",
+                //     {
+                //         params: { player_id: playerId },
+                //     }
+                // );
                 const player_info = response.data.player_info;
                 const first_year = parseInt(
                     player_info.first_season.split("-")[0]
@@ -44,12 +65,31 @@ const PlayerAwards = () => {
                         }`
                     );
                 }
-                const info_response = await axios.get(
-                    "http://localhost:8000/api/players/get_player_awards/",
-                    {
-                        params: { player_id: playerId },
-                    }
-                );
+                let info_response = null
+                if (deploymentStatus === "production") {
+                    info_response = await axios.get(
+                        // "http://localhost:8000/api/players/get_player_awards/",
+                        "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_player_awards/",
+                        {
+                            params: { player_id: playerId },
+                        }
+                    );
+                } else if (deploymentStatus === "development") {
+                    info_response = await axios.get(
+                        "http://localhost:8000/api/players/get_player_awards/",
+                        // "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_player_awards/",
+                        {
+                            params: { player_id: playerId },
+                        }
+                    );
+                }
+                // const info_response = await axios.get(
+                //     "http://localhost:8000/api/players/get_player_awards/",
+                //     // "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_player_awards/",
+                //     {
+                //         params: { player_id: playerId },
+                //     }
+                // );
                 const player_awards = info_response.data.award_set;
                 let new_player_awards = {}
                 for (const key in player_awards) {

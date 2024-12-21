@@ -4,6 +4,8 @@ import Header from "../components/Header";
 import axios from "axios";
 import styles from "./TeamDetails.module.css";
 
+const deploymentStatus = process.env.REACT_APP_DEPLOYMENTSTATUS;
+
 const TeamDetails = () => {
     const { teamId } = useParams();
     const [team, setTeam] = useState(null);
@@ -19,12 +21,31 @@ const TeamDetails = () => {
             try {
                 setStatus("loading");
                 setImageUrl(`/team_pictures/${teamId}.svg`);
-                const response = await axios.get(
-                    "http://localhost:8000/api/players/get_team_info_from_id/",
-                    {
-                        params: { team_id: teamId },
-                    }
-                );
+                let response = null
+                if (deploymentStatus === "production") {
+                    response = await axios.get(
+                        // "http://localhost:8000/api/players/get_team_info_from_id/",
+                        "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_team_info_from_id/",
+                        {
+                            params: { team_id: teamId },
+                        }
+                    );
+                } else if (deploymentStatus === "development") {
+                    response = await axios.get(
+                        "http://localhost:8000/api/players/get_team_info_from_id/",
+                        // "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_team_info_from_id/",
+                        {
+                            params: { team_id: teamId },
+                        }
+                    );
+                }
+                // response = await axios.get(
+                //     "http://localhost:8000/api/players/get_team_info_from_id/",
+                //     // "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_team_info_from_id/",
+                //     {
+                //         params: { team_id: teamId },
+                //     }
+                // );
                 const team_info = response.data.team_info;
                 const first_year = parseInt(
                     team_info.first_season.split("-")[0]
@@ -40,12 +61,31 @@ const TeamDetails = () => {
                     );
                 }
 
-                const info_response = await axios.get(
-                    "http://localhost:8000/api/players/get_team_advanced_info_from_id/",
-                    {
-                        params: { team_id: teamId },
-                    }
-                );
+                let info_response = null
+                if (deploymentStatus === "production") {
+                    info_response = await axios.get(
+                        // "http://localhost:8000/api/players/get_team_info_from_id/",
+                        "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_team_info_from_id/",
+                        {
+                            params: { team_id: teamId },
+                        }
+                    );
+                } else if (deploymentStatus === "development") {
+                    info_response = await axios.get(
+                        "http://localhost:8000/api/players/get_team_info_from_id/",
+                        // "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_team_info_from_id/",
+                        {
+                            params: { team_id: teamId },
+                        }
+                    );
+                }
+                // const info_response = await axios.get(
+                //     "http://localhost:8000/api/players/get_team_advanced_info_from_id/",
+                //     // "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_team_advanced_info_from_id/",
+                //     {
+                //         params: { team_id: teamId },
+                //     }
+                // );
                 const team_common_info = info_response.data.team_common_info;
                 console.log(team_common_info);
                 setTeamInfo(team_common_info);

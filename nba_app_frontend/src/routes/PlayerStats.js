@@ -10,6 +10,8 @@ import {
     defaultHeaders,
 } from "../helper/constants";
 
+const deploymentStatus = process.env.REACT_APP_DEPLOYMENTSTATUS;
+
 const PlayerStats = () => {
     const { playerId, season } = useParams();
     const [player, setPlayer] = useState(null);
@@ -23,12 +25,31 @@ const PlayerStats = () => {
         (async () => {
             console.log(playerId);
             try {
-                const response = await axios.get(
-                    "http://localhost:8000/api/players/get_player_info_from_id/",
-                    {
-                        params: { player_id: playerId },
-                    }
-                );
+                let response = null
+                if (deploymentStatus === "production") {
+                    response = await axios.get(
+                        // "http://localhost:8000/api/players/get_player_info_from_id/",
+                        "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_player_info_from_id/",
+                        {
+                            params: { player_id: playerId },
+                        }
+                    );
+                } else if (deploymentStatus === "development") {
+                    response = await axios.get(
+                        "http://localhost:8000/api/players/get_player_info_from_id/",
+                        // "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_player_info_from_id/",
+                        {
+                            params: { player_id: playerId },
+                        }
+                    );
+                }
+                // const response = await axios.get(
+                //     "http://localhost:8000/api/players/get_player_info_from_id/",
+                //     // "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_player_info_from_id/",
+                //     {
+                //         params: { player_id: playerId },
+                //     }
+                // );
 
                 const player_info = response.data.player_info;
                 const first_year = parseInt(
@@ -185,12 +206,31 @@ const PlayerStats = () => {
                 setPlayerData(null);
                 setShouldHide(false);
                 try {
-                    const response = await axios.get(
-                        "http://localhost:8000/api/players/get_all_player_game_stats/",
-                        {
-                            params: { player_id: playerId, season: season },
-                        }
-                    );
+                    let response = null
+                    if (deploymentStatus === "production") {
+                        response = await axios.get(
+                            // "http://localhost:8000/api/players/get_all_player_game_stats/",
+                            "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_all_player_game_stats/",
+                            {
+                                params: { player_id: playerId, season: season },
+                            }
+                        );
+                    } else if (deploymentStatus === "development") {
+                        response = await axios.get(
+                            "http://localhost:8000/api/players/get_all_player_game_stats/",
+                            // "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_all_player_game_stats/",
+                            {
+                                params: { player_id: playerId, season: season },
+                            }
+                        );
+                    }
+                    // const response = await axios.get(
+                    //     "http://localhost:8000/api/players/get_all_player_game_stats/",
+                    //     // "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_all_player_game_stats/",
+                    //     {
+                    //         params: { player_id: playerId, season: season },
+                    //     }
+                    // );
                     // setIndices([])
                     const newHeaders = [];
                     const indexArray = {};
