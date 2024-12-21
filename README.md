@@ -1,5 +1,7 @@
 # 🏀 NBA-lytics 🏀
 
+## Try it out [here!](https://nba-lytics.vercel.app/)
+
 **NBA-lytics** is a comprehensive tool for Basketball enthusiasts to access player and team profiles, 
 statistics, accolades and game logs. It also provides a convenient script for downloading player headshots.
 
