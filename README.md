@@ -13,11 +13,11 @@ statistics, accolades and game logs. It also provides a convenient script for do
 1. Clone the repository: `git clone git@github.com:Eric13531/NBA-lytics.git`
 2. Navigate to the backend directory: `cd nba_app_backend`
 3. Run `python -m venv venv` to create a Python virtual environment
-4. Run `source venv/bin/activate` on macOS and Linux, and `venv\Script\activate` on Windows to activate the virtual environment
+4. Run `source venv/bin/activate` on macOS and Linux, and `venv\Scripts\activate` on Windows to activate the virtual environment
 6. Install dependencies: `pip install -r requirements`
 7. Run `./manage.py runserver`
 #### Frontend Setup
-1. Navigate to the frontend directory: `cd nba_app_backend`
+1. Navigate to the frontend directory: `cd nba_app_frontend`
 2. Install dependencies: `npm install`
 3. Run `npm start` to start the React development server
 
