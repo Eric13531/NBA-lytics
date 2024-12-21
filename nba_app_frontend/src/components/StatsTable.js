@@ -81,7 +81,7 @@ const StatsTable = ({ playerId, season }) => {
                 if (deploymentStatus === "production") {
                     response = await axios.get(
                         // "http://localhost:8000/api/players/get_all_player_game_stats/",
-                        "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_all_player_game_stats/",
+                        "https://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_all_player_game_stats/",
                         {
                             params: { player_id: playerId, season: season },
                         }
@@ -89,7 +89,7 @@ const StatsTable = ({ playerId, season }) => {
                 } else if (deploymentStatus === "development") {
                     response = await axios.get(
                         "http://localhost:8000/api/players/get_all_player_game_stats/",
-                        // "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_all_player_game_stats/",
+                        // "https://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_all_player_game_stats/",
                         {
                             params: { player_id: playerId, season: season },
                         }
@@ -97,7 +97,7 @@ const StatsTable = ({ playerId, season }) => {
                 }
                 // const response = await axios.get(
                 //     "http://localhost:8000/api/players/get_all_player_game_stats/",
-                //     // "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_all_player_game_stats/",
+                //     // "https://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_all_player_game_stats/",
                 //     {
                 //         params: { player_id: playerId, season: season },
                 //     }

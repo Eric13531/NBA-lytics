@@ -24,7 +24,7 @@ const TeamSeasons = () => {
                 if (deploymentStatus === "production") {
                     response = await axios.get(
                         // "http://localhost:8000/api/players/get_team_info_from_id/",
-                        "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_team_info_from_id/",
+                        "https://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_team_info_from_id/",
                         {
                             params: { team_id: teamId },
                         }
@@ -32,7 +32,7 @@ const TeamSeasons = () => {
                 } else if (deploymentStatus === "development") {
                     response = await axios.get(
                         "http://localhost:8000/api/players/get_team_info_from_id/",
-                        // "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_team_info_from_id/",
+                        // "https://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_team_info_from_id/",
                         {
                             params: { team_id: teamId },
                         }
@@ -40,7 +40,7 @@ const TeamSeasons = () => {
                 }
                 // const response = await axios.get(
                 //     "http://localhost:8000/api/players/get_team_info_from_id/",
-                //     // "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_team_info_from_id/",
+                //     // "https://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_team_info_from_id/",
                 //     {
                 //         params: { team_id: teamId },
                 //     }
@@ -201,7 +201,7 @@ const TeamSeasons = () => {
                     if (deploymentStatus === "production") {
                         response = await axios.get(
                             // "http://localhost:8000/api/players/get_team_career_averages/",
-                            "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_team_career_averages/",
+                            "https://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_team_career_averages/",
                             {
                                 params: { team_id: teamId },
                             }
@@ -209,7 +209,7 @@ const TeamSeasons = () => {
                     } else if (deploymentStatus === "development") {
                         response = await axios.get(
                             "http://localhost:8000/api/players/get_team_career_averages/",
-                            // "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_team_career_averages/",
+                            // "https://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_team_career_averages/",
                             {
                                 params: { team_id: teamId },
                             }
@@ -217,7 +217,7 @@ const TeamSeasons = () => {
                     }
                     // const response = await axios.get(
                     //     "http://localhost:8000/api/players/get_team_career_averages/",
-                    //     // "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_team_career_averages/",
+                    //     // "https://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_team_career_averages/",
                     //     {
                     //         params: { team_id: teamId },
                     //     }

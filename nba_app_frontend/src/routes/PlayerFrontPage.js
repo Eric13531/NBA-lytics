@@ -23,7 +23,7 @@ const PlayerSearchForm = () => {
                     if (deploymentStatus === "production") {
                         response = await axios.get(
                             // "http://localhost:8000/api/players/get_player_search_results/",
-                            "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_player_search_results/",
+                            "https://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_player_search_results/",
                             {
                                 params: { player_name: playerName },
                             }
@@ -31,7 +31,7 @@ const PlayerSearchForm = () => {
                     } else if (deploymentStatus === "development") {
                         response = await axios.get(
                             "http://localhost:8000/api/players/get_player_search_results/",
-                            // "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_player_search_results/",
+                            // "https://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_player_search_results/",
                             {
                                 params: { player_name: playerName },
                             }
@@ -39,7 +39,7 @@ const PlayerSearchForm = () => {
                     }
                     // const response = await axios.get(
                     //     "http://localhost:8000/api/players/get_player_search_results/",
-                    //     // "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_player_search_results/",
+                    //     // "https://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_player_search_results/",
                     //     {
                     //         params: { player_name: playerName },
                     //     }
@@ -85,7 +85,7 @@ const PlayerSearchForm = () => {
                 if (deploymentStatus === "production") {
                     response = await axios.get(
                         // "http://localhost:8000/api/players/get_player_id/",
-                        "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_player_id/",
+                        "https://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_player_id/",
                         {
                             params: { player_name: playerName },
                         }
@@ -93,7 +93,7 @@ const PlayerSearchForm = () => {
                 } else if (deploymentStatus === "development") {
                     response = await axios.get(
                         "http://localhost:8000/api/players/get_player_id/",
-                        // "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_player_id/",
+                        // "https://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_player_id/",
                         {
                             params: { player_name: playerName },
                         }
@@ -101,7 +101,7 @@ const PlayerSearchForm = () => {
                 }
             // const response = await axios.get(
             //     "http://localhost:8000/api/players/get_player_id/",
-            //     // "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_player_id/",
+            //     // "https://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_player_id/",
             //     {
             //         params: { player_name: playerName },
             //     }
@@ -174,7 +174,7 @@ const TeamSearchForm = () => {
                     if (deploymentStatus === "production") {
                         response = await axios.get(
                             // "http://localhost:8000/api/players/get_team_search_results/",
-                            "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_team_search_results/",
+                            "https://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_team_search_results/",
                             {
                                 params: { team_name: teamName },
                             }
@@ -182,7 +182,7 @@ const TeamSearchForm = () => {
                     } else if (deploymentStatus === "development") {
                         response = await axios.get(
                             "http://localhost:8000/api/players/get_team_search_results/",
-                            // "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_team_search_results/",
+                            // "https://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_team_search_results/",
                             {
                                 params: { team_name: teamName },
                             }
@@ -190,7 +190,7 @@ const TeamSearchForm = () => {
                     }
                     // const response = await axios.get(
                     //     "http://localhost:8000/api/players/get_team_search_results/",
-                    //     // "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_team_search_results/",
+                    //     // "https://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_team_search_results/",
                     //     {
                     //         params: { team_name: teamName },
                     //     }
@@ -236,7 +236,7 @@ const TeamSearchForm = () => {
                 if (deploymentStatus === "production") {
                     response = await axios.get(
                         // "http://localhost:8000/api/players/get_team_id/",
-                        "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_team_id/",
+                        "https://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_team_id/",
                         {
                             params: { team_name: teamName },
                         }
@@ -244,7 +244,7 @@ const TeamSearchForm = () => {
                 } else if (deploymentStatus === "development") {
                     response = await axios.get(
                         "http://localhost:8000/api/players/get_team_id/",
-                        // "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_team_id/",
+                        // "https://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_team_id/",
                         {
                             params: { team_name: teamName },
                         }
@@ -252,7 +252,7 @@ const TeamSearchForm = () => {
                 }
             // const response = await axios.get(
             //     "http://localhost:8000/api/players/get_team_id/",
-            //     // "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_team_id/",
+            //     // "https://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_team_id/",
             //     {
             //         params: { team_name: teamName },
             //     }

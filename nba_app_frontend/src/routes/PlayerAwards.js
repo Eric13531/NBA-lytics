@@ -28,7 +28,7 @@ const PlayerAwards = () => {
                 if (deploymentStatus === "production") {
                     response = await axios.get(
                         // "http://localhost:8000/api/players/get_player_info_from_id/",
-                        "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_player_info_from_id/",
+                        "https://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_player_info_from_id/",
                         {
                             params: { player_id: playerId },
                         }
@@ -36,7 +36,7 @@ const PlayerAwards = () => {
                 } else if (deploymentStatus === "development") {
                     response = await axios.get(
                         "http://localhost:8000/api/players/get_player_info_from_id/",
-                        // "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_player_info_from_id/",
+                        // "https://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_player_info_from_id/",
                         {
                             params: { player_id: playerId },
                         }
@@ -44,7 +44,7 @@ const PlayerAwards = () => {
                 }
                 // const response = await axios.get(
                 //     "http://localhost:8000/api/players/get_player_info_from_id/",
-                //     // "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_player_info_from_id/",
+                //     // "https://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_player_info_from_id/",
                 //     {
                 //         params: { player_id: playerId },
                 //     }
@@ -69,7 +69,7 @@ const PlayerAwards = () => {
                 if (deploymentStatus === "production") {
                     info_response = await axios.get(
                         // "http://localhost:8000/api/players/get_player_awards/",
-                        "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_player_awards/",
+                        "https://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_player_awards/",
                         {
                             params: { player_id: playerId },
                         }
@@ -77,7 +77,7 @@ const PlayerAwards = () => {
                 } else if (deploymentStatus === "development") {
                     info_response = await axios.get(
                         "http://localhost:8000/api/players/get_player_awards/",
-                        // "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_player_awards/",
+                        // "https://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_player_awards/",
                         {
                             params: { player_id: playerId },
                         }
@@ -85,7 +85,7 @@ const PlayerAwards = () => {
                 }
                 // const info_response = await axios.get(
                 //     "http://localhost:8000/api/players/get_player_awards/",
-                //     // "http://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_player_awards/",
+                //     // "https://nba-lytics-django-413a47ec986b.herokuapp.com/api/players/get_player_awards/",
                 //     {
                 //         params: { player_id: playerId },
                 //     }
